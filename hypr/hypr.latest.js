@@ -1,4 +1,55 @@
 (function () {
+  function parseURL(url) {
+    try {
+      const parsed = new URL(url.startsWith('http') ? url : `https://${url}`);
+      const hostname = parsed.hostname.replace(/^www\./, '').toLowerCase();
+      const pathname = parsed.pathname.replace(/\/+$/, '');
+      return { hostname, pathname };
+    } catch {
+      return null;
+    }
+  }
+
+  function isCurrentSiteProtected(siteList) {
+    const { hostname: currentHost, pathname: currentPath } = parseURL(window.location.href);
+
+    return siteList.some(entry => {
+      const [rawHost, ...pathParts] = entry.split('/');
+      const pathPattern = pathParts.join('/');
+
+      // Handle wildcard subdomains
+      let hostRegex = rawHost
+        .replace(/^www\./, '')
+        .replace(/\./g, '\\.')
+        .replace(/^\*\./, '([a-z0-9-]+\\.)*'); // *.example.com
+
+      let pathRegex = pathPattern
+        ? pathPattern.replace(/\*/g, '.*') // glob-like wildcard matching
+        : '';
+
+      const fullRegex = new RegExp(`^${hostRegex}${pathRegex ? '/' + pathRegex : ''}$`, 'i');
+
+      return fullRegex.test(`${currentHost}${currentPath}`);
+    });
+  }
+
+  const protectedSites = [
+    'https://get-hypr.github.io',
+    'https://proplayer919.dev',
+    'https://*.proplayer919.dev',
+    'https://rainycards.com',
+    'https://*.rainycards.com',
+    'https://economix.lol',
+    'https://*.economix.lol',
+    'https://proplayer919.github.io',
+    'https://proplayer929.github.io'
+  ];
+
+  if (isCurrentSiteProtected(protectedSites)) {
+    alert("This site is protected with Hypr Protect. Get Hypr Protect to stop Hypr from being used on your site.");
+    return;
+  }
+
   // Initialize pinned and recent tools
   window.pinnedTools = JSON.parse(localStorage.getItem('hypr-pinned')) || [];
   let recentTools = JSON.parse(localStorage.getItem('hypr-recent')) || [];
