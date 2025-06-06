@@ -13,7 +13,7 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Calculator</h3>
-                      <button id="pin-calculator" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-calculator" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Enter expressions (e.g., 2 + 2, sin(30)).</p>
                   <input id="calculator-input" type="text" placeholder="e.g., 2 + 2 or sin(30)" class="tool-input">
@@ -50,7 +50,7 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Unit Converter</h3>
-                      <button id="pin-unit-converter" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-unit-converter" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Convert units for length, weight, or temperature.</p>
                   <select id="unit-type" onchange="window.updateUnitOptions()" class="tool-select">
@@ -78,7 +78,7 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Text Summarizer</h3>
-                      <button id="pin-text-summarizer" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-text-summarizer" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Paste text to generate a concise summary.</p>
                   <textarea id="summarizer-input" placeholder="Paste text here" rows="5" class="tool-textarea"></textarea>
@@ -95,7 +95,7 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Formula Reference</h3>
-                      <button id="pin-formula-reference" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-formula-reference" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Common formulas for math and science.</p>
                   <select id="formula-category" onchange="window.updateFormulas()" class="tool-select">
@@ -115,7 +115,7 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Note Taker</h3>
-                      <button id="pin-note-taker" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-note-taker" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Write and save notes locally.</p>
                   <textarea id="notes-input" placeholder="Write your notes here" rows="5" class="tool-textarea"></textarea>
@@ -134,13 +134,13 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Cheat Sheet</h3>
-                      <button id="pin-cheat-sheet" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-cheat-sheet" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Store key info for quick access (saved locally).</p>
                   <textarea id="cheatsheet-input" placeholder="Enter key info (e.g., formulas, vocab)" rows="5" class="tool-textarea"></textarea>
                   <div class="button-group">
                       <button onclick="window.saveCheatSheet()" class="action-button" data-tooltip="Save cheat sheet">Save</button>
-                      <button onclick="window.clearCheatSheet()" class="action-button" data-tooltip="Clear cheat sheet">Clear</button>
+                      Seul<button onclick="window.clearCheatSheet()" class="action-button" data-tooltip="Clear cheat sheet">Clear</button>
                   </div>
               </div>
           `
@@ -153,7 +153,7 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Encryptor/Decryptor</h3>
-                      <button id="pin-encryptor" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-encryptor" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Securely encrypt or decrypt text with a password.</p>
                   <textarea id="encryptor-input" placeholder="Enter text to encrypt/decrypt" rows="4" class="tool-textarea"></textarea>
@@ -180,7 +180,7 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">History Flooder</h3>
-                      <button id="pin-history-flooder" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-history-flooder" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Add current page to history multiple times (1-1000).</p>
                   <div class="input-group">
@@ -199,10 +199,10 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Tab Disguise</h3>
-                      <button id="pin-tab-disguise" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-tab-disguise" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Make the page look like Google Drive.</p>
-                  <button onclick="window.disguiseTab()" class="action-button" data-tooltip="Disguise tab">Disguise tab</button>
+                  <button onclick="window.disguiseTab()" class="action-button" data-tooltip="Disguise tab">Disguise Tab</button>
               </div>
           `
     },
@@ -214,7 +214,7 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Tab Opener</h3>
-                      <button id="pin-tab-opener" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-tab-opener" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Open multiple tabs (1-50) of a URL (default: current page).</p>
                   <input id="tab-url" type="text" placeholder="URL (leave blank for current page)" class="tool-input">
@@ -234,7 +234,7 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Stealth Opener</h3>
-                      <button id="pin-stealth-opener" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-stealth-opener" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Open a URL without adding it to your history.</p>
                   <input id="stealth-url" type="text" placeholder="URL (leave blank for current page)" class="tool-input">
@@ -251,7 +251,7 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Cookie Cleaner</h3>
-                      <button id="pin-cookie-cleaner" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-cookie-cleaner" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Delete all cookies for this domain (may log you out).</p>
                   <button onclick="window.clearCookies()" class="action-button" data-tooltip="Clear cookies">Clear Cookies</button>
@@ -267,7 +267,7 @@
               <div class="tool-card">
                   <div class="tool-header">
                       <h3 class="tool-title">Cache Buster</h3>
-                      <button id="pin-cache-buster" class="pin-button" data-tooltip="Pin to sidebar"></button>
+                      <button id="pin-cache-buster" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
                   </div>
                   <p class="tool-description">Clear cache for this site or force a hard reload.</p>
                   <button onclick="window.clearCache()" class="action-button" data-tooltip="Clear cache">Clear Cache</button>
@@ -284,56 +284,68 @@
       position: fixed;
       top: 100px;
       left: 100px;
-      width: 600px;
-      min-height: 400px;
+      width: 650px;
+      min-height: 450px;
       background-color: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 10px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      border: 2px solid #ff1a1a;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       resize: both;
-      overflow: auto;
+      overflow: hidden;
       z-index: 1000;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       color: #f1f5f9;
+      transition: transform 0.2s ease;
   `;
 
   const header = document.createElement('div');
   header.style.cssText = `
       background: #1e293b;
-      padding: 10px 16px;
+      padding: 12px 16px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
       cursor: move;
-      border-radius: 10px 10px 0 0;
+      border-radius: 12px 12px 0 0;
       user-select: none;
+      border-bottom: 1px solid #ff1a1a;
+  `;
+
+  const logo = document.createElement('img');
+  logo.src = 'https://get-hypr.github.io/brand/logo.png';
+  logo.style.cssText = `
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      border-radius: 4px;
   `;
 
   const title = document.createElement('span');
   title.textContent = 'Hypr';
   title.style.cssText = `
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 700;
       color: #f1f5f9;
   `;
 
   const buttonContainer = document.createElement('div');
   buttonContainer.style.cssText = `
       display: flex;
-      gap: 6px;
+      gap: 8px;
       align-items: center;
+      margin-left: auto;
   `;
 
   const minimizeBtn = document.createElement('button');
   minimizeBtn.innerHTML = '—';
   minimizeBtn.style.cssText = `
       background: none;
-      border: none;
-      color: #f1f5f9;
+      border: 1px solid #ff1a1a;
+      color: #ff1a1a;
       font-size: 14px;
       cursor: pointer;
-      padding: 4px 8px;
-      transition: color 0.2s, transform 0.2s;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: background-color 0.2s, color 0.2s, transform 0.2s;
   `;
   minimizeBtn.setAttribute('data-tooltip', 'Minimize');
   minimizeBtn.onmouseover = () => minimizeBtn.style.transform = 'scale(1.1)';
@@ -343,12 +355,13 @@
   closeBtn.innerHTML = '✕';
   closeBtn.style.cssText = `
       background: none;
-      border: none;
-      color: #f1f5f9;
+      border: 1px solid #ff1a1a;
+      color: #ff1a1a;
       font-size: 14px;
       cursor: pointer;
-      padding: 4px 8px;
-      transition: color 0.2s, transform 0.2s;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: background-color 0.2s, color 0.2s, transform 0.2s;
   `;
   closeBtn.setAttribute('data-tooltip', 'Close');
   closeBtn.onmouseover = () => closeBtn.style.transform = 'scale(1.1)';
@@ -357,169 +370,184 @@
   const content = document.createElement('div');
   content.style.cssText = `
       display: flex;
-      height: calc(100% - 40px);
+      height: calc(100% - 50px);
   `;
 
   const sidebar = document.createElement('div');
   sidebar.className = 'sidebar';
   sidebar.style.cssText = `
-      width: 160px;
+      width: 180px;
       background-color: #1e293b;
-      padding: 12px;
-      border-right: 1px solid #334155;
+      padding: 16px;
+      border-right: 1px solid #ff1a1a;
       overflow-y: auto;
   `;
 
   const mainContent = document.createElement('div');
   mainContent.style.cssText = `
       flex: 1;
-      padding: 12px;
+      padding: 16px;
       overflow-y: auto;
+      background-color: #0f172a;
   `;
 
-  // Styles (enhanced shadcn-inspired dark mode)
+  // Styles (enhanced with red accents and modern design)
   const styleEl = document.createElement('style');
   styleEl.textContent = `
       #hypr-window * { box-sizing: border-box; }
+      #hypr-window.minimized { transform: scale(0.95); opacity: 0.9; }
       #hypr-window button:focus, #hypr-window input:focus, #hypr-window textarea:focus, #hypr-window select:focus {
-          outline: 2px solid #3b82f6;
+          outline: 2px solid #ff1a1a;
           outline-offset: 2px;
       }
       #hypr-window .sidebar button {
           width: 100%;
-          padding: 8px 12px;
-          margin-bottom: 6px;
+          padding: 10px 14px;
+          margin-bottom: 8px;
           background-color: #334155;
           color: #f1f5f9;
-          border: none;
-          border-radius: 6px;
+          border: 1px solid #475569;
+          border-radius: 8px;
           cursor: pointer;
-          font-size: 13px;
+          font-size: 14px;
           font-weight: 500;
-          transition: background-color 0.2s, transform 0.2s;
+          transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
           position: relative;
       }
       #hypr-window .sidebar button:hover {
-          background-color: #475569;
-          transform: translateX(2px);
+          background-color: #ff1a1a;
+          border-color: #ff1a1a;
+          transform: translateX(4px);
       }
       #hypr-window .sidebar h4 {
-          font-size: 12px;
+          font-size: 13px;
           font-weight: 600;
           color: #94a3b8;
-          margin: 10px 0 6px;
+          margin: 12px 0 8px;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.8px;
       }
       #hypr-window .tool-card {
           background-color: #1e293b;
-          padding: 12px;
-          border-radius: 8px;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+          padding: 16px;
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+          transition: transform 0.2s;
+      }
+      #hypr-window .tool-card:hover {
+          transform: translateY(-2px);
       }
       #hypr-window .tool-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 8px;
+          margin-bottom: 10px;
       }
-      #hypr-window .tool-title {
-          font-size: 16px;
-          font-weight: 600;
+      #hypr-window .tool-title, #hypr-window .header-title {
+          font-size: 18px;
+          font-weight: 700;
           color: #f1f5f9;
       }
       #hypr-window .pin-button {
           background: none;
           border: none;
           color: #94a3b8;
-          font-size: 14px;
+          font-size: 16px;
           cursor: pointer;
           padding: 4px;
           transition: color 0.2s, transform 0.2s;
           position: relative;
       }
       #hypr-window .pin-button:hover {
-          color: #f1f5f9;
-          transform: scale(1.1);
+          color: #ff1a1a;
+          transform: scale(1.15);
       }
       #hypr-window .tool-description {
-          font-size: 12px;
+          font-size: 13px;
           color: #94a3b8;
-          margin-bottom: 10px;
+          margin-bottom: 12px;
       }
       #hypr-window .tool-input, #hypr-window .tool-textarea, #hypr-window .tool-select {
           width: 100%;
-          padding: 8px 12px;
-          margin-bottom: 10px;
+          padding: 10px 14px;
+          margin-bottom: 12px;
           background-color: #334155;
           border: 1px solid #475569;
-          border-radius: 6px;
+          border-radius: 8px;
           color: #f1f5f9;
-          font-size: 13px;
-          transition: border-color 0.2s;
+          font-size: 14px;
+          transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      #hypr-window .tool-input:hover, #hypr-window .tool-textarea:hover, #hypr-window .tool-select:hover {
+          border-color: #ff1a1a;
+          box-shadow: 0 0 5px rgba(255, 26, 26, 0.3);
       }
       #hypr-window .tool-textarea {
           resize: vertical;
-          min-height: 60px;
+          min-height: 80px;
       }
       #hypr-window .calc-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 6px;
-          margin-bottom: 10px;
+          gap: 8px;
+          margin-bottom: 12px;
       }
       #hypr-window .calc-button {
-          padding: 8px;
+          padding: 10px;
           background-color: #334155;
           color: #f1f5f9;
-          border: none;
-          border-radius: 6px;
+          border: 1px solid #475569;
+          border-radius: 8px;
           cursor: pointer;
-          font-size: 13px;
-          transition: background-color 0.2s, transform 0.2s;
+          font-size: 14px;
+          transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
           position: relative;
       }
       #hypr-window .calc-button:hover {
           background-color: #475569;
+          border-color: #ff1a1a;
           transform: scale(1.05);
       }
       #hypr-window .calc-button.primary {
-          background-color: #3b82f6;
+          background-color: #ff1a1a;
+          border-color: #ff1a1a;
       }
       #hypr-window .calc-button.primary:hover {
-          background-color: #2563eb;
+          background-color: #e01414;
+          border-color: #e01414;
           transform: scale(1.05);
       }
       #hypr-window .action-button {
           width: 100%;
-          padding: 8px 12px;
-          background-color: #3b82f6;
+          padding: 10px 14px;
+          background-color: #ff1a1a;
           color: #f1f5f9;
           border: none;
-          border-radius: 6px;
+          border-radius: 8px;
           cursor: pointer;
-          font-size: 13px;
-          font-weight: 500;
+          font-size: 14px;
+          font-weight: 600;
           transition: background-color 0.2s, transform 0.2s;
           position: relative;
       }
       #hypr-window .action-button:hover {
-          background-color: #2563eb;
-          transform: scale(1.02);
+          background-color: #e01414;
+          transform: scale(1.03);
       }
       #hypr-window .toggle-button {
-          padding: 8px;
+          padding: 10px;
           background-color: #334155;
           color: #f1f5f9;
           border: 1px solid #475569;
-          border-radius: 6px;
+          border-radius: 8px;
           cursor: pointer;
-          font-size: 13px;
-          transition: background-color 0.2s, transform 0.2s;
+          font-size: 14px;
+          transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
           position: relative;
       }
       #hypr-window .toggle-button:hover {
           background-color: #475569;
+          border-color: #ff1a1a;
           transform: scale(1.05);
       }
       #hypr-window .toggle-button.copied {
@@ -528,16 +556,16 @@
       }
       #hypr-window .button-group {
           display: flex;
-          gap: 6px;
-          margin-bottom: 10px;
+          gap: 8px;
+          margin-bottom: 12px;
       }
       #hypr-window .button-group .action-button {
           flex: 1;
       }
       #hypr-window .input-group {
           display: flex;
-          gap: 6px;
-          margin-bottom: 10px;
+          gap: 8px;
+          margin-bottom: 12px;
           align-items: center;
       }
       #hypr-window .input-group .tool-input, #hypr-window .input-group .tool-select {
@@ -545,39 +573,73 @@
       }
       #hypr-window .output-group {
           display: flex;
-          gap: 6px;
-          margin-bottom: 10px;
+          gap: 8px;
+          margin-bottom: 12px;
           align-items: flex-start;
       }
       #hypr-window .output-group .tool-textarea {
           flex: 1;
       }
       #hypr-window .formula-list p {
-          font-size: 13px;
+          font-size: 14px;
           color: #f1f5f9;
-          margin: 6px 0;
+          margin: 8px 0;
       }
       #hypr-window .recent-tools button, #hypr-window .search-results button:not(.pin-button), #hypr-window .browse-tools button {
           width: 100%;
-          padding: 8px 12px;
+          padding: 10px 14px;
           background-color: #334155;
           color: #f1f5f9;
-          border: none;
-          border-radius: 6px;
+          border: 1px solid #475569;
+          border-radius: 8px;
           cursor: pointer;
-          font-size: 13px;
+          font-size: 14px;
           font-weight: 500;
-          transition: background-color 0.2s, transform 0.2s;
+          transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
       }
       #hypr-window .recent-tools button:hover, #hypr-window .search-results button:not(.pin-button):hover, #hypr-window .browse-tools button:hover {
-          background-color: #475569;
-          transform: scale(1.02);
+          background-color: #ff1a1a;
+          border-color: #ff1a1a;
+          transform: scale(1.03);
       }
       #hypr-window .search-results > div {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 6px;
+          margin-bottom: 8px;
+      }
+      #hypr-window .pagination {
+          display: flex;
+          gap: 8px;
+          justify-content: center;
+          align-items: center;
+          margin-top: 12px;
+      }
+      #hypr-window .pagination button {
+          padding: 8px 12px;
+          background-color: #334155;
+          color: #f1f5f9;
+          border: 1px solid #475569;
+          border-radius: 8px;
+          cursor: pointer;
+          font-size: 14px;
+          transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
+      }
+      #hypr-window .pagination button:hover {
+          background-color: #ff1a1a;
+          border-color: #ff1a1a;
+          transform: scale(1.05);
+      }
+      #hypr-window .pagination button:disabled {
+          background-color: #1e293b;
+          border-color: #334155;
+          color: #64748b;
+          cursor: not-allowed;
+          transform: none;
+      }
+      #hypr-window .pagination span {
+          font-size: 14px;
+          color: #94a3b8;
       }
       #hypr-window [data-tooltip] {
           position: relative;
@@ -590,27 +652,19 @@
           transform: translateX(-50%) translateY(-8px);
           background-color: #1e293b;
           color: #f1f5f9;
-          padding: 4px 8px;
-          border-radius: 4px;
-          font-size: 12px;
+          padding: 6px 10px;
+          border-radius: 6px;
+          font-size: 13px;
           white-space: nowrap;
           opacity: 0;
           pointer-events: none;
           transition: opacity 0.2s, transform 0.2s;
           z-index: 10;
+          border: 1px solid #ff1a1a;
       }
       #hypr-window [data-tooltip]:hover::after {
           opacity: 1;
-          transform: translateX(-50%) translateY(-12px);
-      }
-      #hypr-window [data-tooltip].pin-button::after, #hypr-window [data-tooltip].toggle-button::after {
-          bottom: auto;
-          top: 50%;
-          left: 100%;
-          transform: translateX(8px) translateY(-50%);
-      }
-      #hypr-window [data-tooltip].pin-button:hover::after, #hypr-window [data-tooltip].toggle-button:hover::after {
-          transform: translateX(12px) translateY(-50%);
+          transform: translateX(-50%) translateY(-14px);
       }
   `;
   document.head.appendChild(styleEl);
@@ -696,10 +750,9 @@
           const result = document.createElement('div');
           result.innerHTML = `
                       <button data-tooltip="${tool.name}">${tool.name}</button>
-                      <button id="data-${tool.id}" class="pin-button" data-tooltip="${window.pinnedTools.includes(tool.id) ? 'Unpin' : 'Pin'} to sidebar"></button>
+                      <button id="data-${tool.id}" class="pin-button" data-tooltip="${window.pinnedTools.includes(tool.id) ? 'Unpin' : 'Pin'} to sidebar">${window.pinnedTools.includes(tool.id) ? '📍' : '📌'}</button>
                   `;
           result.children[0].onclick = () => loadTool(tool.id);
-          result.children[1].innerHTML = window.pinnedTools.includes(tool.id) ? '📍' : '📌';
           result.children[1].onclick = () => window.pinTool(tool.id);
           resultsContainer.appendChild(result);
         });
@@ -707,22 +760,59 @@
     });
   };
 
-  // Browse view
+  // Browse view with pagination
+  let currentPage = 1;
+  const toolsPerPage = 5;
   const showBrowse = () => {
     mainContent.innerHTML = `
           <div class="tool-card">
               <h3 class="header-title">Browse Tools</h3>
               <div id="browse-tools" class="browse-tools"></div>
+              <div id="pagination" class="pagination"></div>
           </div>
       `;
     const browseContainer = document.getElementById('browse-tools');
-    tools.forEach(tool => {
-      const button = document.createElement('button');
-      button.textContent = tool.name;
-      button.setAttribute('data-tooltip', tool.description);
-      button.onclick = () => loadTool(tool.id);
-      browseContainer.appendChild(button);
-    });
+    const paginationContainer = document.getElementById('pagination');
+    const totalPages = Math.ceil(tools.length / toolsPerPage);
+
+    const updateBrowsePage = () => {
+      browseContainer.innerHTML = '';
+      const start = (currentPage - 1) * toolsPerPage;
+      const end = start + toolsPerPage;
+      const paginatedTools = tools.slice(start, end);
+
+      paginatedTools.forEach(tool => {
+        const button = document.createElement('button');
+        button.textContent = tool.name;
+        button.setAttribute('data-tooltip', tool.description);
+        button.onclick = () => loadTool(tool.id);
+        browseContainer.appendChild(button);
+      });
+
+      paginationContainer.innerHTML = '';
+      const prevButton = document.createElement('button');
+      prevButton.textContent = 'Prev';
+      prevButton.disabled = currentPage === 1;
+      prevButton.onclick = () => {
+        if (currentPage > 1) {
+          currentPage--;
+          updateBrowsePage();
+        }
+      };
+      const nextButton = document.createElement('button');
+      nextButton.textContent = 'Next';
+      nextButton.disabled = currentPage === totalPages;
+      nextButton.onclick = () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          updateBrowsePage();
+        }
+      };
+      const pageInfo = document.createElement('span');
+      pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+      paginationContainer.append(prevButton, pageInfo, nextButton);
+    };
+    updateBrowsePage();
   };
 
   // Load a tool
@@ -739,7 +829,6 @@
       recentTools = [toolId, ...recentTools.filter(id => id !== toolId)].slice(0, 5);
       localStorage.setItem('hypr-recent', JSON.stringify(recentTools));
 
-      // Attach event listeners dynamically
       if (tool.id === 'calculator') {
         const calcButton = mainContent.querySelector('.calc-button.primary');
         if (calcButton) calcButton.addEventListener('click', window.calculate);
@@ -782,6 +871,9 @@
       } else if (tool.id === 'cache-buster') {
         const clearButton = mainContent.querySelector('.action-button');
         if (clearButton) clearButton.addEventListener('click', window.clearCache);
+      } else if (tool.id === 'stealth-opener') {
+        const stealthButton = mainContent.querySelector('.action-button');
+        if (stealthButton) stealthButton.addEventListener('click', window.stealthOpen);
       }
     }
   };
@@ -807,7 +899,7 @@
 
   // Append elements
   buttonContainer.append(minimizeBtn, closeBtn);
-  header.append(title, buttonContainer);
+  header.append(logo, title, buttonContainer);
   content.append(sidebar, mainContent);
   windowEl.append(header, content);
   document.body.appendChild(windowEl);
@@ -921,7 +1013,7 @@
         feet: 3.28084,
         inches: 39.3701
       };
-      result = (value * conversions[from]) * conversions[to];
+      result = (value / conversions[from]) * conversions[to];
     } else if (type === 'weight') {
       const conversions = {
         kilograms: 1,
@@ -929,7 +1021,7 @@
         pounds: 2.20462,
         ounces: 35.274
       };
-      result = (value * conversions[from]) * conversions[to];
+      result = (value / conversions[from]) * conversions[to];
     } else if (type === 'temperature') {
       let celsius;
       if (from === 'Celsius') celsius = value;
@@ -1032,7 +1124,6 @@
     }
   };
 
-  // Encryptor functions
   window.loadEncryptor = () => {
     const input = document.getElementById('encryptor-input');
     const output = document.getElementById('encryptor-output');
@@ -1040,12 +1131,10 @@
     const toggleBtn = document.getElementById('toggle-password');
     const copyBtn = document.getElementById('copy-output');
     if (input && output && password && toggleBtn && copyBtn) {
-      // Load saved data
       input.value = localStorage.getItem('hypr-encryptor-input') || '';
       output.value = localStorage.getItem('hypr-encryptor-output') || '';
       password.value = localStorage.getItem('hypr-encryptor-password') || '';
 
-      // Toggle password visibility
       toggleBtn.onclick = () => {
         const isHidden = password.getAttribute('type') === 'password';
         password.setAttribute('type', isHidden ? 'text' : 'password');
@@ -1053,7 +1142,6 @@
         toggleBtn.textContent = isHidden ? '👁️‍🗨️' : '👁️';
       };
 
-      // Copy output to clipboard
       copyBtn.onclick = async () => {
         if (!output.value) return;
         try {
@@ -1071,7 +1159,6 @@
         }
       };
 
-      // Save input/output/password on change
       input.addEventListener('input', () => localStorage.setItem('hypr-encryptor-input', input.value));
       output.addEventListener('input', () => localStorage.setItem('hypr-encryptor-output', output.value));
       password.addEventListener('input', () => localStorage.setItem('hypr-encryptor-password', password.value));
@@ -1184,7 +1271,6 @@
     }
   };
 
-  // New tool functions
   window.floodHistory = () => {
     const countInput = document.getElementById('history-count');
     const status = document.getElementById('history-status');
@@ -1199,7 +1285,7 @@
     try {
       const url = window.location.href;
       for (let i = 0; i < count; i++) {
-        history.pushState(0, 0, i == count ? window.location.href : i.toString());
+        history.pushState({}, '', i === count - 1 ? url : `${url}#${i}`);
       }
       status.textContent = `Added ${count} entries to history`;
     } catch (e) {
@@ -1207,64 +1293,63 @@
     }
   };
 
-  // Tab disguiser
   window.disguiseTab = () => {
     try {
-      // Change title
       document.title = 'Google Drive';
-
-      // Change favicon
       const links = document.querySelectorAll("link[rel~='icon']");
       links.forEach(link => link.remove());
-
-      // Create new favicon link
       const newFavicon = document.createElement('link');
       newFavicon.rel = 'icon';
-      newFavicon.href = 'https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png'
+      newFavicon.href = 'https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png';
       document.head.appendChild(newFavicon);
     } catch (e) {
-      status.textContent = 'Failed to disguise tab';
+      const status = document.getElementById('tab-status');
+      if (status) status.textContent = 'Failed to disguise tab';
     }
   };
 
-  // Stealth opener
   window.stealthOpen = () => {
     const stealthURL = document.getElementById('stealth-url');
-    if (!stealthURL) return;
+    const status = document.getElementById('tab-status');
+    if (!stealthURL || !status) return;
 
-    const url = stealthURL.value;
-
+    const url = stealthURL.value.trim() || window.location.href;
     try {
       const html = `
           <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Stealth Opener</title>
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-  }
-  iframe {
-    border: none;
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-</style>
-</head>
-<body>
-<iframe src="${url}"></iframe>
-</body>
-</html>
-          `;
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>Stealth Opener</title>
+              <style>
+                  html, body {
+                      margin: 0;
+                      padding: 0;
+                      height: 100%;
+                      overflow: hidden;
+                  }
+                  iframe {
+                      border: none;
+                      width: 100%;
+                      height: 100%;
+                      display: block;
+                  }
+              </style>
+          </head>
+          <body>
+              <iframe src="${url}"></iframe>
+          </body>
+          </html>
+      `;
       const newWindow = window.open('about:blank', '_blank');
-      newWindow.document.write(html);
-      newWindow.document.close();
+      if (newWindow) {
+        newWindow.document.write(html);
+        newWindow.document.close();
+        status.textContent = 'Opened URL in stealth mode';
+      } else {
+        status.textContent = 'Failed to open: Pop-up blocked';
+      }
     } catch (e) {
       status.textContent = 'Failed to stealth open';
     }
