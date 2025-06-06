@@ -11,9 +11,14 @@
   }
 
   function isCurrentSiteProtected(siteList) {
+    console.log(`Hypr Protect: Checking if ${window.location.href} is protected...`);
+
     const { hostname: currentHost, pathname: currentPath } = parseURL(window.location.href);
+    console.log(`Hypr Protect: Current host - ${currentHost}`);
+    console.log(`Hypr Protect: Current path - ${currentPath}`);
 
     return siteList.some(entry => {
+      console.log(`Hypr Protect: Checking entry - ${entry}`);
       const [rawHost, ...pathParts] = entry.split('/');
       const pathPattern = pathParts.join('/');
 
@@ -28,13 +33,16 @@
         : '';
 
       const fullRegex = new RegExp(`^${hostRegex}${pathRegex ? '/' + pathRegex : ''}$`, 'i');
+      console.log(`Hypr Protect: Compiled regex - ${fullRegex}`);
 
-      return fullRegex.test(`${currentHost}${currentPath}`);
+      const result = fullRegex.test(`${currentHost}${currentPath}`);
+      console.log(`Hypr Protect: Entry matches - ${result}`);
+
+      return result;
     });
   }
 
   const protectedSites = [
-    'https://get-hypr.github.io',
     'https://proplayer919.dev',
     'https://*.proplayer919.dev',
     'https://rainycards.com',
@@ -45,7 +53,11 @@
     'https://proplayer929.github.io'
   ];
 
-  if (isCurrentSiteProtected(protectedSites)) {
+  const isBlocked = isCurrentSiteProtected(protectedSites);
+
+  console.log(`Hypr Protect: Current page blocked - ${isBlocked}`);
+
+  if (isBlocked) {
     alert("This site is protected with Hypr Protect. Get Hypr Protect to stop Hypr from being used on your site.");
     return;
   }
