@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypr</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      body {
+        background: linear-gradient(155deg, #0a0a0a 0%, #1c2526 100%);
+        color: #fff;
+        overflow-x: hidden;
+      }
+
+      header {
+        background: linear-gradient(to right, #000, #151515);
+        padding: 1.75rem 0;
+        border-bottom: 3px solid #ff1a1a;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+      }
+
+      .header-content {
+        max-width: 1500px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h1 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ff1a1a;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+      }
+
+      header p {
+        font-size: 1.1rem;
+        color: #d1d5db;
+        display: none;
+      }
+
+      @media (min-width: 768px) {
+        header p {
+          display: block;
+        }
+
+        header h1 {
+          font-size: 3rem;
+        }
+      }
+
+      .container {
+        max-width: 1500px;
+        margin: 0 auto;
+        padding: 5rem 1.5rem;
+      }
+
+      .hero {
+        background: radial-gradient(circle at center, #2a2a2a 0%, #0f0f0f 100%);
+        padding: 4rem 2.5rem;
+        border-radius: 1.25rem;
+        border: 3px solid #ff1a1a;
+        box-shadow: 0 0 40px rgba(255, 26, 26, 0.7), inset 0 0 15px rgba(255, 26, 26, 0.4);
+        text-align: center;
+        animation: fadeIn 1s ease-out;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(255, 26, 26, 0.2), transparent 70%);
+        opacity: 0.3;
+        z-index: -1;
+      }
+
+      .hero h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 3rem;
+        font-weight: 700;
+        color: #ff1a1a;
+        margin-bottom: 1.75rem;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        color: #d1d5db;
+        margin-bottom: 2.5rem;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+        justify-content: center;
+      }
+
+      @media (min-width: 640px) {
+        .cta-buttons {
+          flex-direction: row;
+        }
+      }
+
+      .btn-cta {
+        position: relative;
+        overflow: hidden;
+        padding: 1.25rem 3rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        border-radius: 1rem;
+        text-decoration: none;
+        transition: all 0.5s ease;
+        z-index: 1;
+      }
+
+      .btn-cta-primary {
+        background: linear-gradient(45deg, #ff1a1a, #ff4d4d);
+        color: #fff;
+      }
+
+      .btn-cta-secondary {
+        background: transparent;
+        border: 3px solid #ff1a1a;
+        color: #ff1a1a;
+      }
+
+      .btn-cta:hover {
+        transform: scale(1.08) translateY(-8px);
+        box-shadow: 0 15px 25px rgba(255, 26, 26, 0.6);
+      }
+
+      .btn-cta-primary:hover {
+        background: linear-gradient(45deg, #ff4d4d, #ff6666);
+      }
+
+      .btn-cta-secondary:hover {
+        background: #ff1a1a;
+        color: #fff;
+      }
+
+      .btn-cta::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: 0.7s;
+      }
+
+      .btn-cta:hover::after {
+        left: 100%;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        margin-top: 5rem;
+      }
+
+      @media (min-width: 768px) {
+        .features {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .feature-card {
+        background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+        padding: 2.5rem;
+        border-radius: 1.25rem;
+        border: 2px solid #ff1a1a;
+        transition: all 0.5s ease;
+        animation: fadeIn 1s ease-out;
+        position: relative;
+      }
+
+      .feature-card:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+
+      .feature-card:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-12px) scale(1.05);
+        box-shadow: 0 20px 30px rgba(255, 26, 26, 0.5);
+        border-color: #ff4d4d;
+      }
+
+      .feature-card h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #ff1a1a;
+        margin-bottom: 1.25rem;
+      }
+
+      .feature-card p {
+        font-size: 1.1rem;
+        color: #d1d5db;
+      }
+
+      .instructions {
+        background: linear-gradient(135deg, #1a1a1a, #252525);
+        padding: 3rem;
+        border-radius: 1.25rem;
+        border: 2px solid #ff1a1a;
+        margin-top: 5rem;
+        animation: fadeIn 1s ease-out;
+        animation-delay: 0.9s;
+      }
+
+      .instructions h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: #ff1a1a;
+        margin-bottom: 1.75rem;
+      }
+
+      .instructions ol {
+        list-style-type: decimal;
+        padding-left: 2rem;
+        color: #d1d5db;
+        max-width: 900px;
+        margin: 0;
+      }
+
+      .instructions li {
+        font-size: 1.2rem;
+        margin-bottom: 1.25rem;
+      }
+
+      footer {
+        background: linear-gradient(to right, #000, #151515);
+        padding: 2.5rem 0;
+        border-top: 3px solid #ff1a1a;
+        text-align: center;
+      }
+
+      footer p {
+        font-size: 1.2rem;
+        color: #d1d5db;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(25px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="header-content">
+        <h1>Hypr</h1>
+        <p>Supercharge Your Schoolwork</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <section class="hero">
+        <h2>Welcome to Hypr</h2>
+        <p>Revolutionize your school game—click below for instant access to cutting-edge school tools!</p>
+        <div class="cta-buttons">
+          <a href="get.html" class="btn-cta btn-cta-primary">Get It Now</a>
+          <a href="demo.html" class="btn-cta btn-cta-secondary">Try It Out</a>
+        </div>
+      </section>
+
+      <section class="features">
+        <div class="feature-card">
+          <h3>Quick Notes</h3>
+          <p>Capture key points from any page instantly—study smarter, not harder.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Auto-Summarize</h3>
+          <p>Shrink lengthy texts into bite-sized summaries in seconds.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Calculator & Unit Converters</h3>
+          <p>Crush math problems right in your browser with one click.</p>
+        </div>
+      </section>
+
+      <section class="instructions">
+        <h2>How to Use Hypr</h2>
+        <ol>
+          <li>Click "Get It Now" to download or access the Hypr tool suite.</li>
+          <li>Install or activate it within your browser environment.</li>
+          <li>Choose notes, summaries, or calculations on the fly.</li>
+        </ol>
+      </section>
+    </div>
+
+    <footer>
+      <p>© 2025 Hypr. Use responsibly and in line with your school's rules.</p>
+    </footer>
+  </body>
+
+</html>
