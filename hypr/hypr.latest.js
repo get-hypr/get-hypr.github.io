@@ -496,7 +496,9 @@ const Hypr = (() => {
       { id: 'cookie-cleaner', name: 'Cookie Cleaner', description: 'Clear all cookies for the current domain.', scriptUrl: `${config.toolBaseUrl}cookie-cleaner.js` },
       { id: 'cache-buster', name: 'Cache Buster', description: 'Clear browser cache for the current site.', scriptUrl: `${config.toolBaseUrl}cache-buster.js` },
       { id: 'todo-list', name: 'TODO List', description: 'Have a TODO list.', scriptUrl: `${config.toolBaseUrl}todo-list.js` },
-      { id: 'timer', name: 'Timer', description: 'Set a countdown timer in seconds.', scriptUrl: `${config.toolBaseUrl}timer.js` }
+      { id: 'timer', name: 'Timer', description: 'Set a countdown timer in seconds.', scriptUrl: `${config.toolBaseUrl}timer.js` },
+      { id: 'stopwatch', name: 'Stopwatch', description: 'Track elapsed time with start, stop, and reset.', scriptUrl: `${config.toolBaseUrl}stopwatch.js` },
+      { id: 'random-number', name: 'Random Number Generator', description: 'Generate a random number within a range.', scriptUrl: `${config.toolBaseUrl}random-number.js` }
     ];
     for (const toolConfig of toolConfigs) {
       await toolRegistry.registerTool(toolConfig);
