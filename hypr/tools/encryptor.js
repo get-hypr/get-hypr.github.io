@@ -22,7 +22,6 @@ export const html = `
 `;
 
 export const css = `
-  /* Encryptor/Decryptor-specific styles */
   .output-group button { min-width: 40px; }
 `;
 
@@ -64,6 +63,20 @@ export const init = (utils) => {
         output.addEventListener('input', () => utils.localStorage.set('hypr-encryptor-output', output.value));
         password.addEventListener('input', () => utils.localStorage.set('hypr-encryptor-password', password.value));
       }
+    },
+    async deriveKey(password, salt) {
+      const encoder = new TextEncoder();
+      const passwordBuffer = encoder.encode(password);
+      const saltBuffer = salt || crypto.getRandomValues(new Uint8Array(16));
+      const keyMaterial = await crypto.subtle.importKey('raw', passwordBuffer, 'PBKDF2', false, ['deriveBits', 'deriveKey']);
+      const key = await crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt: saltBuffer, iterations: 100000, hash: 'SHA-256' },
+        keyMaterial,
+        { name: 'AES-GCM', length: 256 },
+        true,
+        ['encrypt', 'decrypt']
+      );
+      return { key, salt: saltBuffer };
     },
     async encryptText() {
       const input = utils.dom.getElement('encryptor-input');
@@ -118,7 +131,7 @@ export const init = (utils) => {
         const iv = new Uint8Array(encryptedObj.iv);
         const salt = new Uint8Array(encryptedObj.salt);
         const data = new Uint8Array(encryptedObj.data);
-        const { key } = await utils.deriveKey(pass, salt);
+        const { key } = await this.deriveKey(pass, salt);
         const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
         const decoder = new TextDecoder();
         output.value = decoder.decode(decrypted);

@@ -29,7 +29,10 @@ const Hypr = (() => {
       color: '#f1f5f9',
       transition: 'transform 0.2s ease'
     },
-    toolBaseUrl: 'https://get-hypr.github.io/hypr/tools/'
+    // toolBaseUrl: 'https://get-hypr.github.io/hypr/tools/',
+    // cheatBaseUrl: 'https://get-hypr.github.io/hypr/cheats/',
+    toolBaseUrl: 'http://localhost:3000/hypr/tools/',
+    cheatBaseUrl: 'http://localhost:3000/hypr/cheats/',
   };
 
   // State management
@@ -50,7 +53,8 @@ const Hypr = (() => {
     header: null,
     content: null,
     sidebar: null,
-    mainContent: null
+    mainContent: null,
+    cheatsSupported: null,
   };
 
   // Utility: Parse URL
@@ -65,19 +69,24 @@ const Hypr = (() => {
     }
   };
 
-  // Utility: Check if current site is protected
-  const isCurrentSiteProtected = (siteList) => {
+  // Utility: Check if current site is included
+  const isCurrentSiteIncluded = (siteList) => {
     const { hostname: currentHost, pathname: currentPath } = parseURL(window.location.href);
+    console.log(`Checking if current site is included in ${siteList}`);
+    console.log(`Current Host: ${currentHost}`);
+    console.log(`Current Path: ${currentPath}`);
     return siteList.some(entry => {
-      const [rawHost, ...pathParts] = entry.split('/');
-      const pathPattern = pathParts.join('/');
-      let hostRegex = rawHost
+      const [rawHost] = entry.split('/');
+      const hostRegex = rawHost
         .replace(/^www\./, '')
         .replace(/\./g, '\\.')
         .replace(/^\*\./, '([a-z0-9-]+\\.)*');
-      let pathRegex = pathPattern ? pathPattern.replace(/\*/g, '.*') : '';
-      const fullRegex = new RegExp(`^${hostRegex}${pathRegex ? '/' + pathRegex : ''}$`, 'i');
-      return fullRegex.test(`${currentHost}${currentPath}`);
+      const fullRegex = new RegExp(`^${hostRegex}$`, 'i');
+      const match = fullRegex.test(currentHost);
+      console.log(`Checking against ${entry}`);
+      console.log(`Regex: ${fullRegex}`);
+      console.log(`Match: ${match}`);
+      return match;
     });
   };
 
@@ -114,6 +123,44 @@ const Hypr = (() => {
     }
   };
 
+  // Cheat Registry
+  const cheatRegistry = {
+    cheats: [],
+    async registerCheat(cheatConfig) {
+      if (!cheatConfig.id || !cheatConfig.name || !cheatConfig.description || !cheatConfig.scriptUrl || !cheatConfig.supportedSites) {
+        console.error('Cheat registration failed: Missing required properties (id, name, description, scriptUrl, supportedSites)');
+        return;
+      }
+      try {
+        const module = await import(cheatConfig.scriptUrl);
+        const cheat = {
+          id: cheatConfig.id,
+          name: cheatConfig.name,
+          description: cheatConfig.description,
+          supportedSites: cheatConfig.supportedSites,
+          content: module.html,
+          init: module.init || (() => { }),
+          styles: module.css || ''
+        };
+        this.cheats.push(cheat);
+        if (cheat.styles) {
+          const styleEl = document.createElement('style');
+          styleEl.textContent = cheat.styles;
+          document.head.appendChild(styleEl);
+        }
+      } catch (e) {
+        console.error(`Failed to load cheat ${cheatConfig.id} from ${cheatConfig.scriptUrl}:`, e);
+      }
+    },
+    getCheat(id) {
+      return this.cheats.find(c => c.id === id);
+    },
+    getSupportedCheats() {
+      console.log(this.cheats);
+      return this.cheats.filter(c => isCurrentSiteIncluded(c.supportedSites));
+    }
+  };
+
   // DOM Manager
   const domManager = {
     createElement(tag, styles, attributes = {}) {
@@ -146,6 +193,20 @@ const Hypr = (() => {
         color: '#f1f5f9'
       });
       title.textContent = 'Hypr';
+      elements.cheatsSupported = this.createElement('button', {
+        background: 'none',
+        border: '1px solid #ff1a1a',
+        color: '#ff1a1a',
+        fontSize: '14px',
+        cursor: 'pointer',
+        padding: '4px 10px',
+        borderRadius: '6px',
+        marginLeft: '2rem',
+        transition: 'background-color 0.2s, color 0.2s, transform 0.2s'
+      }, { 'data-tooltip': 'HyprCheats' });
+      elements.cheatsSupported.textContent = '🎮';
+      elements.cheatsSupported.onmouseover = () => elements.cheatsSupported.style.transform = 'scale(1.1)';
+      elements.cheatsSupported.onmouseout = () => elements.cheatsSupported.style.transform = 'scale(1)';
       const buttonContainer = this.createElement('div', {
         display: 'flex',
         gap: '8px',
@@ -197,7 +258,7 @@ const Hypr = (() => {
       });
 
       buttonContainer.append(minimizeBtn, closeBtn);
-      elements.header.append(logo, title, buttonContainer);
+      elements.header.append(logo, title, elements.cheatsSupported, buttonContainer);
       elements.content.append(elements.sidebar, elements.mainContent);
       elements.windowEl.append(elements.header, elements.content);
       document.body.appendChild(elements.windowEl);
@@ -220,6 +281,12 @@ const Hypr = (() => {
         }
       });
       document.addEventListener('mouseup', () => state.isDragging = false);
+      elements.cheatsSupported.addEventListener('click', () => {
+        if (elements.cheatsSupported.style.display === 'none') {
+          return;
+        }
+        viewManager.showCheats();
+      });
       minimizeBtn.addEventListener('click', () => {
         elements.windowEl.classList.toggle('minimized');
         elements.content.style.display = elements.windowEl.classList.contains('minimized') ? 'none' : 'flex';
@@ -309,6 +376,12 @@ const Hypr = (() => {
           }
         });
         elements.sidebar.appendChild(pinnedSection);
+      }
+    },
+    updateHeader() {
+      console.log(cheatRegistry.getSupportedCheats());
+      if (cheatRegistry.getSupportedCheats().length > 0) {
+        elements.cheatsSupported.style.display = 'block';
       }
     },
     showHome() {
@@ -413,6 +486,56 @@ const Hypr = (() => {
       };
       updateBrowsePage();
     },
+    showCheats() {
+      elements.mainContent.innerHTML = `
+        <div class="tool-card">
+          <h3 class="header-title">HyprCheats</h3>
+          <div id="cheat-list" class="browse-tools"></div>
+          <div id="cheat-pagination" class="pagination"></div>
+        </div>
+      `;
+      const cheatListContainer = document.getElementById('cheat-list');
+      const cheats = cheatRegistry.getSupportedCheats();
+      const totalPages = Math.ceil(cheats.length / config.toolsPerPage);
+
+      const updateCheatPage = () => {
+        cheatListContainer.innerHTML = '';
+        const start = (state.currentPage - 1) * config.toolsPerPage;
+        const end = start + config.toolsPerPage;
+        const paginatedCheats = cheats.slice(start, end);
+        paginatedCheats.forEach(cheat => {
+          const button = domManager.createElement('button', {}, { 'data-tooltip': cheat.description });
+          button.textContent = cheat.name;
+          button.onclick = () => this.loadCheat(cheat.id);
+          cheatListContainer.appendChild(button);
+        });
+
+        const paginationContainer = document.getElementById('cheat-pagination');
+        paginationContainer.innerHTML = '';
+        const prevButton = domManager.createElement('button', {});
+        prevButton.textContent = 'Prev';
+        prevButton.disabled = state.currentPage === 1;
+        prevButton.onclick = () => {
+          if (state.currentPage > 1) {
+            state.currentPage--;
+            updateCheatPage();
+          }
+        };
+        const nextButton = domManager.createElement('button', {});
+        nextButton.textContent = 'Next';
+        nextButton.disabled = state.currentPage === totalPages;
+        nextButton.onclick = () => {
+          if (state.currentPage < totalPages) {
+            state.currentPage++;
+            updateCheatPage();
+          }
+        };
+        const pageInfo = document.createElement('span');
+        pageInfo.textContent = `Page ${state.currentPage} of ${totalPages}`;
+        paginationContainer.append(prevButton, pageInfo, nextButton);
+      };
+      updateCheatPage();
+    },
     loadTool(toolId) {
       const tool = toolRegistry.getTool(toolId);
       if (tool) {
@@ -426,6 +549,13 @@ const Hypr = (() => {
         state.recentTools = [toolId, ...state.recentTools.filter(id => id !== toolId)].slice(0, config.maxRecentTools);
         localStorage.setItem('hypr-recent', JSON.stringify(state.recentTools));
         if (tool.init) tool.init(Hypr.toolUtilities);
+      }
+    },
+    loadCheat(cheatId) {
+      const cheat = cheatRegistry.getCheat(cheatId);
+      if (cheat) {
+        elements.mainContent.innerHTML = cheat.content;
+        if (cheat.init) cheat.init(Hypr.cheatUtilities);
       }
     }
   };
@@ -462,20 +592,20 @@ const Hypr = (() => {
       getElement: (id) => document.getElementById(id),
       query: (selector) => document.querySelector(selector),
       queryAll: (selector) => document.querySelectorAll(selector)
+    }
+  };
+
+  // Base Cheat Utilities (Available to external cheats)
+  const cheatUtilities = {
+    localStorage: {
+      get: (key) => localStorage.getItem(key),
+      set: (key, value) => localStorage.setItem(key, value),
+      remove: (key) => localStorage.removeItem(key)
     },
-    async deriveKey(password, salt) {
-      const encoder = new TextEncoder();
-      const passwordBuffer = encoder.encode(password);
-      const saltBuffer = salt || crypto.getRandomValues(new Uint8Array(16));
-      const keyMaterial = await crypto.subtle.importKey('raw', passwordBuffer, 'PBKDF2', false, ['deriveBits', 'deriveKey']);
-      const key = await crypto.subtle.deriveKey(
-        { name: 'PBKDF2', salt: saltBuffer, iterations: 100000, hash: 'SHA-256' },
-        keyMaterial,
-        { name: 'AES-GCM', length: 256 },
-        true,
-        ['encrypt', 'decrypt']
-      );
-      return { key, salt: saltBuffer };
+    dom: {
+      getElement: (id) => document.getElementById(id),
+      query: (selector) => document.querySelector(selector),
+      queryAll: (selector) => document.querySelectorAll(selector)
     }
   };
 
@@ -505,21 +635,35 @@ const Hypr = (() => {
     }
   };
 
+  // Register default cheats (pointing to external scripts)
+  const registerDefaultCheats = async () => {
+    const cheatConfigs = [
+      { id: 'test', name: 'Test Cheat', description: 'Test for HyprCheats!', scriptUrl: `${config.cheatBaseUrl}test.js`, supportedSites: ['localhost', 'get-hypr.github.io'] },
+    ];
+    for (const cheatConfig of cheatConfigs) {
+      await cheatRegistry.registerCheat(cheatConfig);
+    }
+  };
+
   // Public API
   return {
     async init() {
-      if (isCurrentSiteProtected(config.protectedSites)) {
+      if (isCurrentSiteIncluded(config.protectedSites)) {
         alert("This site is protected with Hypr Protect. Get Hypr Protect to stop Hypr from being used on your site.");
         return;
       }
       domManager.injectStyles();
       domManager.initUI();
       await registerDefaultTools();
+      await registerDefaultCheats();
       viewManager.updateSidebar();
+      viewManager.updateHeader();
       viewManager.showHome();
     },
     registerTool: toolRegistry.registerTool.bind(toolRegistry),
-    toolUtilities
+    registerCheat: cheatRegistry.registerCheat.bind(cheatRegistry),
+    toolUtilities,
+    cheatUtilities
   };
 })();
 
