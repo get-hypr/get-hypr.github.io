@@ -40,6 +40,7 @@ const Hypr = (() => {
     pinnedTools: JSON.parse(localStorage.getItem('hypr-pinned')) || [],
     recentTools: JSON.parse(localStorage.getItem('hypr-recent')) || [],
     currentPage: 1,
+    currentCheatsPage: 1,
     isDragging: false,
     currentX: 100,
     currentY: 100,
@@ -500,7 +501,7 @@ const Hypr = (() => {
 
       const updateCheatPage = () => {
         cheatListContainer.innerHTML = '';
-        const start = (state.currentPage - 1) * config.toolsPerPage;
+        const start = (state.currentCheatsPage - 1) * config.toolsPerPage;
         const end = start + config.toolsPerPage;
         const paginatedCheats = cheats.slice(start, end);
         paginatedCheats.forEach(cheat => {
@@ -514,24 +515,24 @@ const Hypr = (() => {
         paginationContainer.innerHTML = '';
         const prevButton = domManager.createElement('button', {});
         prevButton.textContent = 'Prev';
-        prevButton.disabled = state.currentPage === 1;
+        prevButton.disabled = state.currentCheatsPage === 1;
         prevButton.onclick = () => {
-          if (state.currentPage > 1) {
-            state.currentPage--;
+          if (state.currentCheatsPage > 1) {
+            state.currentCheatsPage--;
             updateCheatPage();
           }
         };
         const nextButton = domManager.createElement('button', {});
         nextButton.textContent = 'Next';
-        nextButton.disabled = state.currentPage === totalPages;
+        nextButton.disabled = state.currentCheatsPage === totalPages;
         nextButton.onclick = () => {
-          if (state.currentPage < totalPages) {
-            state.currentPage++;
+          if (state.currentCheatsPage < totalPages) {
+            state.currentCheatsPage++;
             updateCheatPage();
           }
         };
         const pageInfo = document.createElement('span');
-        pageInfo.textContent = `Page ${state.currentPage} of ${totalPages}`;
+        pageInfo.textContent = `Page ${state.currentCheatsPage} of ${totalPages}`;
         paginationContainer.append(prevButton, pageInfo, nextButton);
       };
       updateCheatPage();
