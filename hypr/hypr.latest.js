@@ -253,11 +253,6 @@ const Hypr = (() => {
         #hypr-window .tool-input, #hypr-window .tool-textarea, #hypr-window .tool-select { width: 100%; padding: 10px 14px; margin-bottom: 12px; background-color: #334155; border: 1px solid #475569; border-radius: 8px; color: #f1f5f9; font-size: 14px; transition: border-color 0.2s, box-shadow 0.2s; }
         #hypr-window .tool-input:hover, #hypr-window .tool-textarea:hover, #hypr-window .tool-select:hover { border-color: #ff1a1a; box-shadow: 0 0 5px rgba(255, 26, 26, 0.3); }
         #hypr-window .tool-textarea { resize: vertical; min-height: 80px; }
-        #hypr-window .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
-        #hypr-window .calc-button { padding: 10px; background-color: #334155; color: #f1f5f9; border: 1px solid #475569; border-radius: 8px; cursor: pointer; font-size: 14px; transition: background-color 0.2s, border-color 0.2s, transform 0.2s; position: relative; }
-        #hypr-window .calc-button:hover { background-color: #475569; border-color: #ff1a1a; transform: scale(1.05); }
-        #hypr-window .calc-button.primary { background-color: #ff1a1a; border-color: #ff1a1a; }
-        #hypr-window .calc-button.primary:hover { background-color: #e01414; border-color: #e01414; transform: scale(1.05); }
         #hypr-window .action-button { width: 100%; padding: 10px 14px; background-color: #ff1a1a; color: #f1f5f9; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; transition: background-color 0.2s, transform 0.2s; position: relative; }
         #hypr-window .action-button:hover { background-color: #e01414; transform: scale(1.03); }
         #hypr-window .toggle-button { padding: 10px; background-color: #334155; color: #f1f5f9; border: 1px solid #475569; border-radius: 8px; cursor: pointer; font-size: 14px; transition: background-color 0.2s, border-color 0.2s, transform 0.2s; position: relative; }
@@ -269,7 +264,6 @@ const Hypr = (() => {
         #hypr-window .input-group .tool-input, #hypr-window .input-group .tool-select { flex: 1; }
         #hypr-window .output-group { display: flex; gap: 8px; margin-bottom: 12px; align-items: flex-start; }
         #hypr-window .output-group .tool-textarea { flex: 1; }
-        #hypr-window .formula-list p { font-size: 14px; color: #f1f5f9; margin: 8px 0; }
         #hypr-window .recent-tools button, #hypr-window .search-results button:not(.pin-button), #hypr-window .browse-tools button { width: 100%; padding: 10px 14px; background-color: #334155; color: #f1f5f9; border: 1px solid #475569; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; transition: background-color 0.2s, border-color 0.2s, transform 0.2s; }
         #hypr-window .recent-tools button:hover, #hypr-window .search-results button:not(.pin-button):hover, #hypr-window .browse-tools button:hover { background-color: #ff1a1a; border-color: #ff1a1a; transform: scale(1.03); }
         #hypr-window .search-results > div { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }

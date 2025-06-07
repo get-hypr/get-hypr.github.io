@@ -15,8 +15,7 @@ export const html = `
 `;
 
 export const css = `
-  /* Formula Reference-specific styles */
-  .formula-list p { padding: 4px; border-left: 2px solid #ff1a1a; }
+  .formula-list p { padding: 4px; border-left: 2px solid #ff1a1a; font-size: 14px; color: #f1f5f9; margin: 8px 0; }
 `;
 
 export const init = (utils) => {
