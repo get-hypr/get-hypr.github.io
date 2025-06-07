@@ -29,10 +29,10 @@ const Hypr = (() => {
       color: '#f1f5f9',
       transition: 'transform 0.2s ease'
     },
-    // toolBaseUrl: 'https://get-hypr.github.io/hypr/tools/',
-    // cheatBaseUrl: 'https://get-hypr.github.io/hypr/cheats/',
-    toolBaseUrl: 'http://localhost:3000/hypr/tools/',
-    cheatBaseUrl: 'http://localhost:3000/hypr/cheats/',
+    toolBaseUrl: 'https://get-hypr.github.io/hypr/tools/',
+    cheatBaseUrl: 'https://get-hypr.github.io/hypr/cheats/',
+    // toolBaseUrl: 'http://localhost:3000/hypr/tools/',
+    // cheatBaseUrl: 'http://localhost:3000/hypr/cheats/',
   };
 
   // State management
