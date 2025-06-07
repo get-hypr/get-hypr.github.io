@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "Hypr",
+  "version": "1.0",
+  "author": "Hypr",
+  "description": "Runs Hypr anywhere!",
+  "icons": {
+    "32": "icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Run Hypr"
+  }
+}
