@@ -1,9 +1,4 @@
-/**
- * Hypr Application - Modular and Extensible with External Tool Loading
- * A self-contained utility toolkit that loads tools from external JS files
- */
-
-// Core Hypr Module (Singleton)
+// Core Hypr Module
 const Hypr = (() => {
   // Private state and configuration
   const config = {
