@@ -293,7 +293,13 @@ const Hypr = (() => {
         elements.content.style.display = elements.windowEl.classList.contains('minimized') ? 'none' : 'flex';
         minimizeBtn.innerHTML = elements.windowEl.classList.contains('minimized') ? '+' : '—';
       });
-      closeBtn.addEventListener('click', () => elements.windowEl.style.display = 'none');
+      closeBtn.addEventListener('click', () => {
+        elements.windowEl.remove();
+        elements.header = null;
+        elements.content = null;
+        elements.sidebar = null;
+        elements.mainContent = null;
+      });
       document.addEventListener('keydown', e => {
         if (e.key.toLowerCase() === 'h' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
           elements.windowEl.style.display = elements.windowEl.style.display === 'none' ? 'block' : 'none';
