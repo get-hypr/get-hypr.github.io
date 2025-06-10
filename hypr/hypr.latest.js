@@ -645,7 +645,7 @@ const Hypr = (() => {
   // Register default cheats (pointing to external scripts)
   const registerDefaultCheats = async () => {
     const cheatConfigs = [
-      { id: 'test', name: 'Test Cheat', description: 'Test for HyprCheats!', scriptUrl: `${config.cheatBaseUrl}test.js`, supportedSites: ['localhost', 'get-hypr.github.io'] },
+      { id: 'transum', name: 'Transum Cheat', description: 'Easily brute force Transum questions.', scriptUrl: `${config.cheatBaseUrl}transum.js`, supportedSites: ['transum.org'] },
     ];
     for (const cheatConfig of cheatConfigs) {
       await cheatRegistry.registerCheat(cheatConfig);
