@@ -12,7 +12,7 @@ There are many reasons to use Hypr:
 ## Installation
 Hypr can be installed in one of two ways:
 
-* **Browser Extension**: The browser extension is currently under review. ~~You can install the Hypr browser extension from the [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/hypr/).~~
+* **Browser Extension**: You can install the Hypr browser extension from the [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/hypr/).
 * **Bookmarklet**: You can install the Hypr bookmarklet by creating a new bookmark and setting the URL to `javascript:(function()%7B(function()%7Bconst%20response%3Dfetch(%22https%3A%2F%2Fget-hypr.github.io%2Fhypr%2Fhypr.latest.js%22).then(res%3D%3E%7Bif(!res.ok)%7Balert('Failed%20to%20load%20Hypr!')%3Breturn%7Dreturn%20res.text()%7D)%3Bresponse.then(scriptContent%3D%3E%7Bconst%20script%3Ddocument.createElement(%22script%22)%3Bscript.textContent%3DscriptContent%3Bdocument.body.appendChild(script)%7D)%7D)()%7D)()`
 
 ## Usage
