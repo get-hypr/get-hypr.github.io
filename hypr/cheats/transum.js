@@ -24,7 +24,8 @@ export const init = (utils) => {
                 }
 
                 function triggerEvaluation() {
-                    if (typeof checkAnswers === "function") checkAnswers();
+                    if (typeof PreCheck === "functiom") PreCheck();
+                    else if (typeof checkAnswers === "function") checkAnswers();
                     else if (typeof RemoveSpaces === "function") RemoveSpaces();
                     else {
                         let btn = document.querySelector("#Checkbutton");
