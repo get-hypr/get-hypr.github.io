@@ -117,7 +117,7 @@ export const init = (utils) => {
             }
 
             const accuracyInput = document.getElementById('decimal-accuracy');
-            await solveAllAnswers(int(accuracyInput.value));
+            await solveAllAnswers(Number(accuracyInput.value));
         }
     };
     Hypr.cheatUtilities.transum = transum;
