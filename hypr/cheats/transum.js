@@ -24,7 +24,7 @@ export const init = (utils) => {
                 }
 
                 function triggerEvaluation() {
-                    if (typeof PreCheck === "functiom") PreCheck();
+                    if (typeof PreCheck === "function") PreCheck();
                     else if (typeof checkAnswers === "function") checkAnswers();
                     else if (typeof RemoveSpaces === "function") RemoveSpaces();
                     else {
