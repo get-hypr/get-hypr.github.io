@@ -624,6 +624,7 @@ const Hypr = (() => {
       { id: 'text-summarizer', name: 'Text Summarizer', description: 'Summarize text for quick study notes.', scriptUrl: `${config.toolBaseUrl}text-summarizer.js` },
       { id: 'formula-reference', name: 'Formula Reference', description: 'Quick reference for common formulas.', scriptUrl: `${config.toolBaseUrl}formula-reference.js` },
       { id: 'note-taker', name: 'Note Taker', description: 'Take and save quick notes.', scriptUrl: `${config.toolBaseUrl}note-taker.js` },
+      { id: 'autoclicker', name: 'Autoclicker', description: 'A useful autoclicker.', scriptUrl: `${config.toolBaseUrl}autoclicker.js` },
       { id: 'cheat-sheet', name: 'Cheat Sheet', description: 'Store quick reference text discreetly.', scriptUrl: `${config.toolBaseUrl}cheat-sheet.js` },
       { id: 'encryptor', name: 'Encryptor/Decryptor', description: 'Encrypt or decrypt text using a password.', scriptUrl: `${config.toolBaseUrl}encryptor.js` },
       { id: 'history-flooder', name: 'History Flooder', description: 'Flood browser history with the current page.', scriptUrl: `${config.toolBaseUrl}history-flooder.js` },
