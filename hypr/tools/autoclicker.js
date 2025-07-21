@@ -4,7 +4,7 @@ export const html = `
       <h3 class="tool-title">Advanced Autoclicker</h3>
       <button id="pin-autoclicker" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
     </div>
-    <p class="tool-description">Automatically click with full control.</p>
+    <p class="tool-description">Automatically click with full control until stopped.</p>
 
     <div class="autoclicker-options">
       <input id="click-interval" type="number" placeholder="Interval (ms)" class="tool-input">
@@ -24,11 +24,6 @@ export const html = `
         <input id="coord-x" type="number" placeholder="X" class="tool-input" style="width: 50%;">
         <input id="coord-y" type="number" placeholder="Y" class="tool-input" style="width: 50%;">
       </div>
-
-      <label style="margin-top: 6px; display: flex; align-items: center; gap: 6px;">
-        <input type="checkbox" id="repeat-toggle" />
-        Repeat indefinitely
-      </label>
 
       <label style="margin-top: 6px; display: flex; align-items: center; gap: 6px;">
         Hotkey: <input id="start-hotkey" class="tool-input" value="F6" style="width: 100px;">
@@ -56,13 +51,11 @@ export const css = `
 export const init = (utils) => {
   const autoclicker = {
     intervalId: null,
-    hotkey: 'F6',
 
     start() {
       const interval = parseInt(utils.dom.getElement('click-interval')?.value);
       const buttonType = utils.dom.getElement('click-button')?.value;
       const mode = utils.dom.getElement('click-mode')?.value;
-      const repeat = utils.dom.getElement('repeat-toggle')?.checked;
       const coordX = parseInt(utils.dom.getElement('coord-x')?.value);
       const coordY = parseInt(utils.dom.getElement('coord-y')?.value);
       const statusText = utils.dom.getElement('autoclicker-status-text');
@@ -72,12 +65,12 @@ export const init = (utils) => {
         return;
       }
 
-      this.stop(); // Clear previous intervals
+      this.stop(); // Clear previous interval
       statusText.textContent = 'Status: Running';
 
       this.intervalId = setInterval(() => {
-        let targetX = 0;
-        let targetY = 0;
+        let x = 0;
+        let y = 0;
 
         if (mode === 'fixed') {
           if (isNaN(coordX) || isNaN(coordY)) {
@@ -85,27 +78,24 @@ export const init = (utils) => {
             this.stop();
             return;
           }
-          targetX = coordX;
-          targetY = coordY;
+          x = coordX;
+          y = coordY;
         } else {
-          const mouseEvent = window.event;
-          targetX = mouseEvent?.clientX ?? 100;
-          targetY = mouseEvent?.clientY ?? 100;
+          x = window.event?.clientX || 100;
+          y = window.event?.clientY || 100;
         }
 
         const buttonCode = buttonType === 'left' ? 0 : buttonType === 'middle' ? 1 : 2;
 
-        const evt = new MouseEvent('click', {
+        const click = new MouseEvent('click', {
           bubbles: true,
           cancelable: true,
           button: buttonCode,
-          clientX: targetX,
-          clientY: targetY
+          clientX: x,
+          clientY: y
         });
 
-        document.elementFromPoint(targetX, targetY)?.dispatchEvent(evt);
-
-        if (!repeat) this.stop();
+        document.elementFromPoint(x, y)?.dispatchEvent(click);
       }, interval);
     },
 
@@ -120,10 +110,9 @@ export const init = (utils) => {
 
     setHotkeyListener() {
       document.addEventListener('keydown', (e) => {
-        const userKey = utils.dom.getElement('start-hotkey')?.value || 'F6';
-        if (e.key.toUpperCase() === userKey.toUpperCase()) {
-          if (this.intervalId) this.stop();
-          else this.start();
+        const hotkey = utils.dom.getElement('start-hotkey')?.value || 'F6';
+        if (e.key.toUpperCase() === hotkey.toUpperCase()) {
+          this.intervalId ? this.stop() : this.start();
         }
       });
     }
@@ -134,8 +123,7 @@ export const init = (utils) => {
   utils.dom.getElement('autoclicker-start')?.addEventListener('click', () => autoclicker.start());
   utils.dom.getElement('autoclicker-stop')?.addEventListener('click', () => autoclicker.stop());
   utils.dom.getElement('click-mode')?.addEventListener('change', (e) => {
-    const mode = e.target.value;
-    utils.dom.getElement('fixed-coords').style.display = mode === 'fixed' ? 'flex' : 'none';
+    utils.dom.getElement('fixed-coords').style.display = e.target.value === 'fixed' ? 'flex' : 'none';
   });
 
   autoclicker.setHotkeyListener();
