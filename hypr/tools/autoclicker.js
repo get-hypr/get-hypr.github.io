@@ -142,7 +142,7 @@ export const init = (utils) => {
 
   autoclicker.initListeners();
 
-  const hotkeyInput = utils.dom.getElement('ac-hotkey');
+  const hotkeyInput = utils.dom.getElement('start-hotkey');
   if (hotkeyInput) {
     autoclicker.captureHotkeyInput(hotkeyInput);
   }
