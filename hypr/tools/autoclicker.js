@@ -97,12 +97,18 @@ export const init = (utils) => {
     },
 
     captureHotkeyInput(inputEl) {
-      inputEl.addEventListener('keydown', (e) => {
+      const updateDisplay = (e) => {
         e.preventDefault();
+
+        // Escape cancels
         if (e.key === 'Escape') {
           inputEl.blur();
           return;
         }
+
+        // Ignore modifier-only presses
+        const ignoredKeys = ['Shift', 'Control', 'Alt', 'Meta'];
+        if (ignoredKeys.includes(e.key)) return;
 
         this.hotkey = e.key.toLowerCase();
         this.modifiers.ctrl = e.ctrlKey;
@@ -117,7 +123,18 @@ export const init = (utils) => {
 
         inputEl.value = [...mods, e.key.toUpperCase()].join(' + ');
         inputEl.blur();
+      };
+
+      // Clear existing value when focused
+      inputEl.addEventListener('focus', () => {
+        inputEl.value = '';
       });
+
+      // Handle key capture
+      inputEl.addEventListener('keydown', updateDisplay);
+
+      // Prevent mouse click from triggering blur unintentionally
+      inputEl.addEventListener('mousedown', e => e.preventDefault());
     }
   };
 
