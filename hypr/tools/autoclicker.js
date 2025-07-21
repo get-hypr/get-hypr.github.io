@@ -51,6 +51,8 @@ export const css = `
 export const init = (utils) => {
   const autoclicker = {
     intervalId: null,
+    hotkey: 'F6',
+    isRecordingHotkey: false,
 
     start() {
       const interval = parseInt(utils.dom.getElement('click-interval')?.value);
@@ -65,7 +67,7 @@ export const init = (utils) => {
         return;
       }
 
-      this.stop(); // Clear previous interval
+      this.stop();
       statusText.textContent = 'Status: Running';
 
       this.intervalId = setInterval(() => {
@@ -108,12 +110,39 @@ export const init = (utils) => {
       statusText.textContent = 'Status: Stopped';
     },
 
-    setHotkeyListener() {
+    bindHotkeyToggle() {
       document.addEventListener('keydown', (e) => {
-        const hotkey = utils.dom.getElement('start-hotkey')?.value || 'F6';
-        if (e.key.toUpperCase() === hotkey.toUpperCase()) {
+        if (this.isRecordingHotkey) return; // avoid conflict
+        if (e.key.toUpperCase() === this.hotkey.toUpperCase()) {
           this.intervalId ? this.stop() : this.start();
         }
+      });
+    },
+
+    bindHotkeyInput() {
+      const input = utils.dom.getElement('start-hotkey');
+      let previousKey = this.hotkey;
+
+      input.addEventListener('focus', () => {
+        input.value = '(press key)';
+        this.isRecordingHotkey = true;
+
+        const captureKey = (e) => {
+          e.preventDefault();
+          if (e.key === 'Escape') {
+            input.value = previousKey;
+            this.isRecordingHotkey = false;
+            window.removeEventListener('keydown', captureKey);
+            return;
+          }
+
+          this.hotkey = e.key;
+          input.value = e.key;
+          this.isRecordingHotkey = false;
+          window.removeEventListener('keydown', captureKey);
+        };
+
+        window.addEventListener('keydown', captureKey);
       });
     }
   };
@@ -126,5 +155,6 @@ export const init = (utils) => {
     utils.dom.getElement('fixed-coords').style.display = e.target.value === 'fixed' ? 'flex' : 'none';
   });
 
-  autoclicker.setHotkeyListener();
+  autoclicker.bindHotkeyToggle();
+  autoclicker.bindHotkeyInput();
 };
