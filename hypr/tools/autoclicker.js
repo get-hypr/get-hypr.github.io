@@ -1,10 +1,10 @@
 export const html = `
   <div class="tool-card">
     <div class="tool-header">
-      <h3 class="tool-title">Advanced Autoclicker</h3>
+      <h3 class="tool-title">Autoclicker</h3>
       <button id="pin-autoclicker" class="pin-button" data-tooltip="Pin to sidebar">📌</button>
     </div>
-    <p class="tool-description">Automatically click with full control until stopped.</p>
+    <p class="tool-description">An advanced autoclicking tool.</p>
 
     <div class="autoclicker-options">
       <input id="click-interval" type="number" placeholder="Interval (ms)" class="tool-input">
