@@ -26,104 +26,107 @@ export const css = `
 
 export const init = (utils) => {
   const autoclicker = {
-    active: false,
     interval: null,
-    cps: 10,
-    hotkeyCombo: ['Control', 'e'],
-    isRecording: false,
+    running: false,
     x: 0,
     y: 0,
+    hotkey: null,
+    modifiers: {
+      ctrl: false,
+      shift: false,
+      alt: false
+    },
 
-    start() {
-      if (window.click || this.active) return;
+    start(cps) {
+      if (this.running || isNaN(cps) || cps <= 0) return;
 
-      const cpsInput = utils.dom.getElement('cps-input');
-      const status = utils.dom.getElement('autoclicker-status-text');
-      const cps = parseFloat(cpsInput?.value);
-
-      if (!cps || isNaN(cps) || cps < 1 || cps > 200) {
-        status.textContent = 'Status: Invalid CPS';
-        return;
-      }
-
-      this.cps = cps;
-      this.active = true;
-      window.click = true;
+      this.running = true;
       document.body.style.cursor = 'crosshair';
-      status.textContent = `Status: Running (${cps} CPS)`;
 
-      window.addEventListener('mousemove', this._trackCursor);
       this.interval = setInterval(() => {
         const el = document.elementFromPoint(this.x, this.y);
-        if (el) el.click();
+        if (!el) return;
+
+        ['mousedown', 'mouseup', 'click'].forEach(type => {
+          const evt = new MouseEvent(type, {
+            bubbles: true,
+            cancelable: true,
+            clientX: this.x,
+            clientY: this.y,
+            button: 0
+          });
+          el.dispatchEvent(evt);
+        });
       }, 1000 / cps);
     },
 
     stop() {
-      if (!this.active) return;
+      if (!this.running) return;
       clearInterval(this.interval);
-      window.removeEventListener('mousemove', this._trackCursor);
       this.interval = null;
-      this.active = false;
-      window.click = false;
+      this.running = false;
       document.body.style.cursor = 'default';
-      const status = utils.dom.getElement('autoclicker-status-text');
-      status.textContent = 'Status: Stopped';
     },
 
-    _trackCursor(e) {
-      autoclicker.x = e.clientX;
-      autoclicker.y = e.clientY;
+    toggle() {
+      const cpsInput = utils.dom.getElement('ac-cps');
+      const cps = parseInt(cpsInput?.value || '0');
+      if (this.running) {
+        this.stop();
+      } else {
+        this.start(cps);
+      }
     },
 
-    bindHotkey() {
-      const input = utils.dom.getElement('start-hotkey');
-
-      input.addEventListener('focus', () => {
-        input.value = '(press combo)';
-        autoclicker.isRecording = true;
-
-        const listener = (e) => {
-          e.preventDefault();
-
-          if (e.key === 'Escape') {
-            input.value = autoclicker.hotkeyCombo.join('+');
-            autoclicker.isRecording = false;
-            window.removeEventListener('keydown', listener);
-            return;
-          }
-
-          const combo = [];
-          if (e.ctrlKey) combo.push('Control');
-          if (e.shiftKey) combo.push('Shift');
-          if (e.altKey) combo.push('Alt');
-          combo.push(e.key);
-
-          autoclicker.hotkeyCombo = combo;
-          input.value = combo.join('+');
-          autoclicker.isRecording = false;
-          window.removeEventListener('keydown', listener);
-        };
-
-        window.addEventListener('keydown', listener);
+    initListeners() {
+      window.addEventListener('mousemove', (e) => {
+        this.x = e.clientX;
+        this.y = e.clientY;
       });
 
-      document.addEventListener('keydown', (e) => {
-        if (autoclicker.isRecording) return;
-
-        const matchKey = autoclicker.hotkeyCombo.includes(e.key);
-        const matchMods =
-          autoclicker.hotkeyCombo.includes('Control') === e.ctrlKey &&
-          autoclicker.hotkeyCombo.includes('Shift') === e.shiftKey &&
-          autoclicker.hotkeyCombo.includes('Alt') === e.altKey;
-
-        if (matchKey && matchMods) {
-          autoclicker.active ? autoclicker.stop() : autoclicker.start();
+      window.addEventListener('keydown', (e) => {
+        if (
+          e.key.toLowerCase() === this.hotkey &&
+          e.ctrlKey === this.modifiers.ctrl &&
+          e.shiftKey === this.modifiers.shift &&
+          e.altKey === this.modifiers.alt
+        ) {
+          this.toggle();
         }
+      });
+    },
+
+    captureHotkeyInput(inputEl) {
+      inputEl.addEventListener('keydown', (e) => {
+        e.preventDefault();
+        if (e.key === 'Escape') {
+          inputEl.blur();
+          return;
+        }
+
+        this.hotkey = e.key.toLowerCase();
+        this.modifiers.ctrl = e.ctrlKey;
+        this.modifiers.shift = e.shiftKey;
+        this.modifiers.alt = e.altKey;
+
+        const mods = [
+          this.modifiers.ctrl ? 'Ctrl' : '',
+          this.modifiers.shift ? 'Shift' : '',
+          this.modifiers.alt ? 'Alt' : ''
+        ].filter(Boolean);
+
+        inputEl.value = [...mods, e.key.toUpperCase()].join(' + ');
+        inputEl.blur();
       });
     }
   };
 
   Hypr.toolUtilities.autoclicker = autoclicker;
-  autoclicker.bindHotkey();
+
+  autoclicker.initListeners();
+
+  const hotkeyInput = utils.dom.getElement('ac-hotkey');
+  if (hotkeyInput) {
+    autoclicker.captureHotkeyInput(hotkeyInput);
+  }
 };
