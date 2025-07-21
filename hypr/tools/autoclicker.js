@@ -134,7 +134,7 @@ export const init = (utils) => {
       inputEl.addEventListener('keydown', updateDisplay);
 
       // Prevent mouse click from triggering blur unintentionally
-      inputEl.addEventListener('mousedown', e => e.preventDefault());
+      // inputEl.addEventListener('mousedown', e => e.preventDefault());
     }
   };
 
